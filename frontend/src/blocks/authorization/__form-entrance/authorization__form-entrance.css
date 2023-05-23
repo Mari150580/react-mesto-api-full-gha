@@ -1,0 +1,11 @@
+.authorization__form-entrance {
+  text-align: center;
+  min-width: 358px;
+  min-height: 17px;
+}
+
+@media screen and (max-width: 320px) {
+  .authorization__form-entrance {
+    min-width: 260px;
+  }
+}

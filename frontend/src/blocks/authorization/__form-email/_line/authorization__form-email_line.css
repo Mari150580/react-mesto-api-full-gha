@@ -1,0 +1,12 @@
+.authorization__form-email_line {
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  max-width: 358px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 320px) {
+  .authorization__form-email_line {
+    max-width: 260px;
+  }
+}

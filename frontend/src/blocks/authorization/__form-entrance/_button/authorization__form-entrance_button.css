@@ -1,0 +1,10 @@
+.authorization__form-entrance_button {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 10px;
+  background-color: black;
+}
+
+.authorization__form-entrance_button:hover {
+  opacity: 50%;
+}

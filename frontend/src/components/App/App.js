@@ -49,7 +49,7 @@ function App() {
 
   function handleRegister({ email, password }) {
     return auth.register(email, password).then(() => {
-      navigate("/sing-in");
+      navigate("/singin");
     });
   }
 
@@ -80,7 +80,7 @@ function App() {
   function logout() {
     setLoggedIn(false);
     localStorage.removeItem("token");
-    navigate("/sign-in");
+    navigate("/signin");
   }
 
   /*Заход данных ссервера*/

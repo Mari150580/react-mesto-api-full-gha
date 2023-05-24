@@ -56,8 +56,3 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
-
-/* NODE_ENV=production
-JWT_SECRET = 'eb28135ebcfc17578f96d4d65b6c7871f2'
-PORT = 3000
-DB_ADDRESS = mongodb://127.0.0.1:27017/mestodb */

@@ -34,7 +34,7 @@ function Login({ handleLogin }) {
       <div className="header">
         <img src={logo} alt="Логотип" className="header__logo" />
         <button className="header__button" type="button">
-          <Link className="authorization__form-entrance_button" to="/sign-up">
+          <Link className="authorization__form-entrance_button" to="/signup">
             Регистрация
           </Link>
         </button>

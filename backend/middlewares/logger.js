@@ -22,4 +22,3 @@ module.exports = {
   requestLogger,
   errorLogger,
 };
-// Проверка git

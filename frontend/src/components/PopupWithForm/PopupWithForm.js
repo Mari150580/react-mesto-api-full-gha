@@ -30,9 +30,6 @@ function PopupWithForm({
           {children}
         </form>
 
-        { /*<button type="submit" onSubmit={handleSubmit} className={`popup__button popup__button_${name}`}>
-          {buttonText}
-  </button> */}
       </div>
     </div>
   );

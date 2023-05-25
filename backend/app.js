@@ -29,7 +29,11 @@ mongoose.connect(DB_ADDRESS, {
 
 app.use(express.json());
 app.use(helmet());
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'] }));
+
+// корс изменили
+// app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'] }));
+app.use(cors());
+
 app.use(limiter);
 
 // подключаем мидлвары, роуты и всё остальное...

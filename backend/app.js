@@ -44,6 +44,8 @@ app.use('/users', usersRouter); // Подключаем роутеры
 
 app.use('/cards', cardsRouter);
 
+app.get('/', (req, res) => res.send('Mari page'));
+
 app.use('*', (req, res, next) => {
   next(new NotFoundError('URL does not exist'));
 });

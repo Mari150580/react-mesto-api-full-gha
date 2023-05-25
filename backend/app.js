@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const BodyParser = require('body-parser');
@@ -40,6 +41,13 @@ app.use(limiter);
 
 app.use(requestLogger); // подключаем логгер запросов
 
+// Краш-тест
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use('/signup', signupRouter);
 
 app.use('/signin', signInRouter);
@@ -47,8 +55,6 @@ app.use('/signin', signInRouter);
 app.use('/users', usersRouter); // Подключаем роутеры
 
 app.use('/cards', cardsRouter);
-
-app.get('/', (req, res) => res.send('Mari page'));
 
 app.use('*', (req, res, next) => {
   next(new NotFoundError('URL does not exist'));

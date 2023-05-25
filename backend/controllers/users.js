@@ -117,7 +117,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jsonwebtoken.sign(
         { _id: user._id },
-        JWT_SECRET,
+        process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
       res.status(200).send({ user, token });

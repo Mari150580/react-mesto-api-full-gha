@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3000";
+// export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://places.nomoredomains.rocks";
 
 /*проверка res если ок то верни json если нет выведи ошибку*/
 const getResponse = (res) => {

@@ -223,7 +223,7 @@ function App() {
                 }
               />
               <Route
-                path="/signup"
+                path="/sign-up"
                 element={
                   <Register
                     handleRegister={handleRegister}
@@ -233,7 +233,7 @@ function App() {
                 }
               />
               <Route
-                path="/singin"
+                path="/sing-in"
                 element={<Login handleLogin={handleLogin} />}
               />
               <Route
@@ -242,7 +242,7 @@ function App() {
                   loggedIn ? (
                     <Navigate to="/" replace />
                   ) : (
-                    <Navigate to="/singin" replace />
+                    <Navigate to="/sing-in" replace />
                   )
                 }
               />

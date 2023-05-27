@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const BodyParser = require('body-parser');
 const helmet = require('helmet');
-const cors = require('cors');
+// const cors = require('cors');
 
 const validationErrors = require('celebrate').errors;
 const NotFoundError = require('./errors/NotFoundError');
@@ -33,7 +33,7 @@ app.use(helmet());
 
 // корс изменили
 // app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'] }));
-app.use(cors());
+// app.use(cors());
 
 app.use(limiter);
 

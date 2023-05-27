@@ -68,8 +68,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         required=""
       />
       <button type="submit" className={`popup__button popup__button_${name}`}>
-        Сохранить
+      Сохранить
       </button>
+      
     </PopupWithForm>
   );
 }

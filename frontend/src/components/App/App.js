@@ -29,6 +29,8 @@ function App() {
   /*стейты для реализации регистрации*/
   const [loggedIn, setLoggedIn] = useState(false);
   const [emailReg, setEmailReg] = useState("");
+
+  // const []
   /*информация об успешной или нет авторизации*/
   const navigate = useNavigate();
 
@@ -37,9 +39,10 @@ function App() {
   function handleLogin({ email, password }) {
     return auth.authorize(email, password).then((data) => {
       if (data.token) {
-        localStorage.setItem("token", data.token);
         setLoggedIn(true);
-        setEmailReg(email);
+        // setEmailReg(email);
+        api.getToken(data.token);
+        localStorage.setItem("token", data.token);
         navigate("/", { replace: true });
       }
     });
@@ -49,12 +52,12 @@ function App() {
 
   function handleRegister({ email, password }) {
     return auth.register(email, password).then(() => {
-      navigate("/singin");
+      navigate("/sing-in");
     });
   }
 
   /*проверка токена при загрузки страницы*/
-  useEffect(() => {
+   useEffect(() => {
     tokenCheck();
   }, []);
 
@@ -62,11 +65,14 @@ function App() {
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
+    console.log(token)
     if (token) {
       auth
         .getContent(token)
-        .then((res) => {
+        .then((data) => {
           setLoggedIn(true);
+          api.getToken(token);
+          setEmailReg(data.email);
           navigate("/");
         })
         .catch(function (err) {
@@ -76,26 +82,28 @@ function App() {
   }
 
   /*выход из системы*/
-
   function logout() {
     setLoggedIn(false);
     localStorage.removeItem("token");
-    navigate("/signin");
+    navigate("/sign-in");
   }
-
   /*Заход данных ссервера*/
 
   useEffect(() => {
+    console.log(loggedIn)
+    if (loggedIn) {
     Promise.all([api.getAllProfile(), api.getAllTasks()])
-      .then(([data, cards]) => {
+    .then(([data, cards]) => {
+       // localStorage.setItem("token", data.token);
         setCurrentUser(data);
         setCards(cards);
       })
+  
 
       .catch(function (err) {
         console.log("Ошибка", err);
       });
-  }, []);
+  }}, [loggedIn, navigate]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);

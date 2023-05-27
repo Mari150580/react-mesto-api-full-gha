@@ -33,9 +33,11 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         ref={avatarRef}
       />
       <span className="popup__input-error image-error" id="error-avatar"></span>
-      <button type="submit" className="popup__button">
-        Сохранить
+
+      <button type="submit" className={`popup__button popup__button`}>
+        Создать
       </button>
+
     </PopupWithForm>
   );
 }

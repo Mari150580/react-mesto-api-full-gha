@@ -1,8 +1,8 @@
 const configs = {
-  url: "https://mesto.nomoreparties.co/v1/cohort-59",
+  url: "https://places.nomoredomains.rocks",
+  
   headers: {
     "content-type": "application/json",
-    authorization: " a9f160f0-4a9e-440f-9994-b1753847a649",
   },
 };
 
@@ -22,6 +22,11 @@ export class Api {
     this._url = configs.url;
     this._headers = configs.headers;
   }
+
+  getToken(token) {
+    this._headers.authorization = `Bearer ${token}`;
+  }
+  
   /*загрузка карточек с сервера*/
   getAllTasks() {
     return fetch(`${this._url}/cards`, {

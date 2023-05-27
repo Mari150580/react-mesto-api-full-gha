@@ -61,6 +61,7 @@ function Register({
 
         <input
           type="text"
+          // type="password"
           className="authorization__form-password"
           name="password"
           placeholder="Пароль"

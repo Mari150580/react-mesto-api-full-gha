@@ -72,13 +72,12 @@ const getUsers = (req, res, next) => {
 
 const editUserProfile = (req, res, next) => {
   const { name, about } = req.body;
-  // const { _id: userId } = req.params.user;
-  return User.findByIdAndUpdate(
-    req.params.userId,
+  User.findByIdAndUpdate(
+    req.user._id,
     { name, about },
     { new: true, runValidators: true },
   )
-    .then(() => res.status(200).send({ name, about }))
+    .then((data) => res.status(200).send(data))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Error validation user'));
@@ -89,8 +88,8 @@ const editUserProfile = (req, res, next) => {
 
 const editUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  return User.findByIdAndUpdate(req.params.userId, avatar, { new: true, runValidators: true })
-    .then(() => res.status(200).send({ avatar }))
+  return User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Error validation user'));

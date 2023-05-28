@@ -24,7 +24,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   /*Удаление*/
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card?.owner?._id === currentUser._id;
   const cardDelitButtonClassName = `element__baskets ${
     isOwn && "element__baskets_active"
   }`;

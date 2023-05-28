@@ -1,5 +1,6 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
-export const BASE_URL = "https://places.nomoredomains.rocks";
+//export const BASE_URL = "https://places.nomoredomains.rocks";
+export const BASE_URL ="http://localhost:3000";
 /*проверка res если ок то верни json если нет выведи ошибку*/
 const getResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);

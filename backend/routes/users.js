@@ -22,13 +22,14 @@ cardRouter.get('/:userId', celebrate({
   }),
 }), getUser);
 
-cardRouter.patch('/me', celebrate({
+cardRouter.patch('/me', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
   }),
 }), editUserProfile);
-cardRouter.patch('/me/avatar', celebrate({
+
+cardRouter.patch('/me/avatar', auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().regex(URL_REGEXP),
   }),

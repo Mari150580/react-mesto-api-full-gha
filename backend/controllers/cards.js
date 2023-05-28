@@ -5,8 +5,12 @@ const AccessRightsError = require('../errors/AccessRightsError');
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  return Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.status(201).send({ data: card }))
+  const owner = req.user._id;
+  Card.create({ name, link, owner })
+    .then((card) => {
+      card.populate(['owner'])
+        .then(() => res.status(201).send(card));
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Error validation card'));
@@ -18,7 +22,9 @@ const createCard = (req, res, next) => {
 // eslint-disable-next-line consistent-return
 const deleteCard = async (req, res, next) => {
   try {
-    const findedCard = await Card.findById(req.params.cardId).orFail();
+    const findedCard = await Card.findById(req.params.cardId)
+    //  .populate(['owner', 'likes'])
+      .orFail();
     const deletedCard = await Card.deleteOne({
       _id: findedCard._id,
       owner: req.user._id,
@@ -40,6 +46,7 @@ const deleteCard = async (req, res, next) => {
 
 const getCards = (req, res, next) => {
   Card.find({})
+    .populate(['owner', 'likes'])
     .then((cards) => res.status(200).send(cards))
     .catch((err) => {
       next(err);
@@ -53,6 +60,7 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true, runValidators: true },
   )
+    .then((card) => card.populate(['owner', 'likes']))
     .then((card) => {
       if (!card) {
         throw next(new NotFoundError('Card not found'));
@@ -78,6 +86,7 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user._id } },
     { new: true, runValidators: true },
   )
+    .then((card) => card.populate(['owner', 'likes']))
     .then((card) => {
       if (!card) {
         throw next(new NotFoundError('Card not found'));

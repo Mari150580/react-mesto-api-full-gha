@@ -40,7 +40,6 @@ function App() {
     return auth.authorize(email, password).then((data) => {
       if (data.token) {
         setLoggedIn(true);
-        // setEmailReg(email);
         api.getToken(data.token);
         localStorage.setItem("token", data.token);
         navigate("/", { replace: true });
@@ -94,12 +93,9 @@ function App() {
     if (loggedIn) {
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
-       // localStorage.setItem("token", data.token);
         setCurrentUser(data);
         setCards(cards);
       })
-  
-
       .catch(function (err) {
         console.log("Ошибка", err);
       });
@@ -141,7 +137,7 @@ function App() {
       .changeLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch(function (err) {
@@ -198,7 +194,7 @@ function App() {
     api
       .addNewTasks(data)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([...cards, newCard]);
         closeAllPopups();
       })
       .catch(function (err) {

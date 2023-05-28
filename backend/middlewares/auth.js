@@ -16,6 +16,7 @@ const auth = (req, res, next) => {
   const token = authorization.replace('Bearer ', '');
 
   let payload;
+ // console.log('4545454', token)
 
   try {
     // попытаемся верифицировать токен

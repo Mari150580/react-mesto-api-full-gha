@@ -60,8 +60,7 @@ function Register({
         <div className="authorization__form-email_line"></div>
 
         <input
-          type="text"
-          // type="password"
+          type="password"
           className="authorization__form-password"
           name="password"
           placeholder="Пароль"

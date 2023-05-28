@@ -11,7 +11,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import * as auth from "../auth/auth";
+import * as auth from "../../utils/auth";
 import InfoTooltipError from "../InfoTooltipError/InfoTooltipError";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import UnionRectangle from "../../images/UnionRectangle.svg";

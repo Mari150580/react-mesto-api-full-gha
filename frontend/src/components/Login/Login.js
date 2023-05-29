@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-function Login({ handleLogin}) {
+function Login({ handleLogin, authorizationEmail}) {
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   function handleChange(e) {

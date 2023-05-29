@@ -41,9 +41,11 @@ function App() {
     .then((data) => {
       if (data.token) {
         setLoggedIn(true);
+        setEmailReg(email);
         localStorage.setItem("token", data.token);
         navigate("/", { replace: true });
       }
+      
     })
     .catch((error) => {
       console.log(`Что то пошло не так ${error}`);
@@ -73,7 +75,6 @@ function App() {
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
-    console.log(token)
     if (token) {
       auth
         .getContent(token)
@@ -98,7 +99,6 @@ function App() {
   /*Заход данных ссервера*/
 
   useEffect(() => {
-    console.log(loggedIn)
     if (loggedIn) {
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {

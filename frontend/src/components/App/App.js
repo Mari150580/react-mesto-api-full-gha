@@ -69,7 +69,8 @@ function App() {
   /*проверка токена при загрузки страницы*/
    useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
+
 
   /*проверка токена*/
 
@@ -98,7 +99,7 @@ function App() {
   }
   /*Заход данных ссервера*/
 
-  useEffect(() => {
+ useEffect(() => {
     if (loggedIn) {
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
@@ -109,6 +110,7 @@ function App() {
         console.log("Ошибка", err);
       });
   }}, [loggedIn, navigate]);
+
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-function Login({ handleLogin }) {
+function Login({ handleLogin}) {
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   function handleChange(e) {
@@ -24,9 +24,6 @@ function Login({ handleLogin }) {
       .then(() => {
         setUserData({ email: "", password: "" });
       })
-      .catch((error) => {
-        console.log(`Что то пошло не так ${error}`);
-      });
   }
 
   return (

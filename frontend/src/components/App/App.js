@@ -37,22 +37,31 @@ function App() {
   /*Логин*/
 
   function handleLogin({ email, password }) {
-    return auth.authorize(email, password).then((data) => {
+    return auth.authorize(email, password)
+    .then((data) => {
       if (data.token) {
         setLoggedIn(true);
-        api.getToken(data.token);
         localStorage.setItem("token", data.token);
         navigate("/", { replace: true });
       }
-    });
+    })
+    .catch((error) => {
+      console.log(`Что то пошло не так ${error}`);
+      handleInfoTooltipError();
+    })
   }
 
   /*Регистрация*/
 
   function handleRegister({ email, password }) {
-    return auth.register(email, password).then(() => {
+    return auth.register(email, password)
+    .then(() => {
       navigate("/sing-in");
-    });
+      handleInfoTooltip();
+    })
+    .catch((error) => {
+      handleInfoTooltipError();
+    })
   }
 
   /*проверка токена при загрузки страницы*/
@@ -194,7 +203,7 @@ function App() {
     api
       .addNewTasks(data)
       .then((newCard) => {
-        setCards([...cards, newCard]);
+        setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch(function (err) {
@@ -238,7 +247,10 @@ function App() {
               />
               <Route
                 path="/sing-in"
-                element={<Login handleLogin={handleLogin} />}
+                element=
+                {<Login 
+                  handleLogin={handleLogin}
+                   />}
               />
               <Route
                 path="*"

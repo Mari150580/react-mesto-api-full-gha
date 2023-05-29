@@ -23,12 +23,6 @@ function Register({
 
     if (userData) {
       handleRegister(userData)
-        .then(() => {
-          handleInfoTooltip();
-        })
-        .catch((error) => {
-          handleInfoTooltipError();
-        });
     }
   }
 

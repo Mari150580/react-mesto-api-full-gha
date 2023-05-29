@@ -1,5 +1,5 @@
 const configs = {
-  url: "https://places.nomoredomains.rocks",
+ url: "https://places.nomoredomains.rocks",
   // url: "http://localhost:3000",
   headers: {
     "content-type": "application/json",

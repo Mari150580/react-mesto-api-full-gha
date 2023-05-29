@@ -103,6 +103,7 @@ function App() {
     if (loggedIn) {
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
+        setLoggedIn(true);
         setCurrentUser(data);
         setCards(cards);
       })

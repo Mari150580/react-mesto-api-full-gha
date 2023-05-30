@@ -27,15 +27,29 @@ export class Api {
     this._headers.authorization = `Bearer ${token}`;
   }
   
-  /*загрузка карточек с сервера*/
-  getAllTasks() {
-    return fetch(`${this._url}/cards`, {
+   /*загрузка профиля ссервера*/
+   getAllProfile() {
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers:  {"content-type" : "application/json",
+    },
     }).then((response) => {
       return this.#onResponse(response);
     });
   }
+  
+  /*загрузка карточек с сервера*/
+  getAllTasks() {
+    return fetch(`${this._url}/cards`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((response) => {
+      return this.#onResponse(response);
+    });
+  }
+
 
   /*полная информация при загрузке*/
 
@@ -58,15 +72,6 @@ export class Api {
   removeCard(idCard) {
     return fetch(`${this._url}/cards/${idCard}`, {
       method: "DELETE",
-      headers: this._headers,
-    }).then((response) => {
-      return this.#onResponse(response);
-    });
-  }
-  /*загрузка профиля ссервера*/
-  getAllProfile() {
-    return fetch(`${this._url}/users/me`, {
-      method: "GET",
       headers: this._headers,
     }).then((response) => {
       return this.#onResponse(response);

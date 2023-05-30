@@ -102,14 +102,11 @@ function App() {
 
  useEffect(() => {
   const token = localStorage.getItem("token");
- // api.getToken(token);
   console.log(token)
-  //setLoggedIn(true);
     if (token) {
       api.getToken(token);
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
-        //setLoggedIn(true);
         setCurrentUser(data);
         setCards(cards);
       })

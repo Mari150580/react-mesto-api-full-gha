@@ -1,6 +1,6 @@
 const configs = {
- url: "https://places.nomoredomains.rocks",
-  // url: "http://localhost:3000",
+ //url: "https://places.nomoredomains.rocks",
+ url: "http://localhost:3000",
   headers: {
     "content-type": "application/json",
   },
@@ -31,8 +31,7 @@ export class Api {
    getAllProfile() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers:  {"content-type" : "application/json",
-    },
+      headers: this._headers,
     }).then((response) => {
       return this.#onResponse(response);
     });
@@ -42,9 +41,7 @@ export class Api {
   getAllTasks() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
+      headers: this._headers,
     }).then((response) => {
       return this.#onResponse(response);
     });

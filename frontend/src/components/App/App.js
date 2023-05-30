@@ -69,19 +69,19 @@ function App() {
   /*проверка токена при загрузки страницы*/
    useEffect(() => {
     tokenCheck();
-  }, [loggedIn]);
-
+  }, []);
 
   /*проверка токена*/
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
+
     if (token) {
+      api.getToken(token);
       auth
         .getContent(token)
         .then((data) => {
           setLoggedIn(true);
-          api.getToken(token);
           setEmailReg(data.email);
           navigate("/");
         })
@@ -100,10 +100,13 @@ function App() {
   /*Заход данных ссервера*/
 
  useEffect(() => {
+  console.log(loggedIn)
+  setLoggedIn(true);
     if (loggedIn) {
+      setLoggedIn(true);
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
-        setLoggedIn(true);
+        //setLoggedIn(true);
         setCurrentUser(data);
         setCards(cards);
       })
@@ -111,7 +114,6 @@ function App() {
         console.log("Ошибка", err);
       });
   }}, [loggedIn, navigate]);
-
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);

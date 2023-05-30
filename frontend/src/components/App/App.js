@@ -64,6 +64,7 @@ function App() {
     .catch((error) => {
       handleInfoTooltipError();
     })
+    
   }
 
   /*проверка токена при загрузки страницы*/
@@ -75,7 +76,6 @@ function App() {
 
   function tokenCheck() {
     const token = localStorage.getItem("token");
-
     if (token) {
       api.getToken(token);
       auth
@@ -99,11 +99,14 @@ function App() {
   }
   /*Заход данных ссервера*/
 
+
  useEffect(() => {
-  console.log(loggedIn)
-  setLoggedIn(true);
-    if (loggedIn) {
-      setLoggedIn(true);
+  const token = localStorage.getItem("token");
+ // api.getToken(token);
+  console.log(token)
+  //setLoggedIn(true);
+    if (token) {
+      api.getToken(token);
     Promise.all([api.getAllProfile(), api.getAllTasks()])
     .then(([data, cards]) => {
         //setLoggedIn(true);
@@ -113,7 +116,11 @@ function App() {
       .catch(function (err) {
         console.log("Ошибка", err);
       });
-  }}, [loggedIn, navigate]);
+  }
+  else {
+    console.log("нет токена")
+  }
+}, [loggedIn, navigate]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
